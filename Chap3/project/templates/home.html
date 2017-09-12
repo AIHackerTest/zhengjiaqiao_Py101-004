@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>天气预报查询</title>
+</head>
+<body align='center'>
+  <h1>天气预报查询</h1>
+  <form action="/" method="post">
+    <p>城市：<input name="location" placeholder="例：北京" value="{{ location }}"></p>
+    <p>
+      <button type="submit" name = 'button' value = 'query'>查询</button>
+      <button type="submit" name = 'button' value = 'history'>历史</button>
+      <button type="submit" name = 'button' value = 'help'>帮助</button>
+    </p>
+  </form >
+
+  {% if weather %}
+  <p>
+    {{ city }}的天气状况为: {{weather}}<br>
+    温度为：{{ temperature }} 摄氏度<br>
+    最后更新日期：{{ time }}
+  </p>
+  {% endif %}
+
+  {% if error %}
+  <p>
+    抱歉，无法查询到{{location}}的天气情况！
+  </p>
+  {% endif %}
+
+  {% if history %}
+  <p>历史查询记录</p>
+  {% for item in history %}
+  <p>
+    {{item['city']}}的天气状况为：{{item['weather']}}，温度为：{{item['temperature']}}摄氏度，最后更新日期：{{item['time']}}<br>
+  </p>
+  {% endfor %}
+  {% endif %}
+
+  {% if help %}
+  <p>
+    输入城市名后点击「查询」按钮，获取该城市的天气情况；<br>
+    点击「历史」按钮，查看历史查询记录；<br>
+    点击「帮助」按钮，查看帮助文档；
+  </p>
+  {% endif %}
+
+</body>
+</html>
